@@ -1,0 +1,10 @@
+{
+  "development": {
+    "host": "node-lhy.coxuqaaz1s7c.ap-northeast-2.rds.amazonaws.com",
+    "username": "admin",
+    "password": "jack9812",
+    "database": "login_lecture",
+    "port" : "3306",
+    "dialect" : "mysql"
+  }
+}
