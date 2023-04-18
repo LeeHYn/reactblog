@@ -70,6 +70,22 @@ class App extends Component {
     }
   }
 
+  _delete = async(el) => {
+    const remove = window.confirm(el.name + '를 삭제할까요?')
+    if(remove){
+      const body = {id:el.id}
+      const res = await axios('/delete/data',{
+        method:'POST',
+        data:{delete:body},
+        headers: new Headers()
+      })
+      if(res.data){
+        alert("data delete")
+        return window.location.reload();
+      }
+    }
+  }
+
   render() {
     const { list } = this.state;
 
@@ -99,12 +115,15 @@ class App extends Component {
             {list.length !== 0
                 ? list.map( (el, key) => {
                   return(
-                      <div key={key} style={{ display : 'grid', lineHeight : '40px', gridTemplateColumns : '32% 35% 30%', width : '50%', marginLeft : '25%'}}>
+                      <div key={key} style={{ display : 'grid', lineHeight : '40px', gridTemplateColumns : '32% 35% 20% 0%', width : '50%', marginLeft : '25%'}}>
                         <div> {el.id} </div>
                         <div> {el.name} </div>
                         <div
                             style={{ color : '#ababab' }}
                             onClick={() => this._modify(el)}> Modify </div>
+                        <div
+                            style={{ color : '#ababab' }}
+                            onClick={() => this._delete(el)}> Delete </div>
                       </div>
                   )
                 })
