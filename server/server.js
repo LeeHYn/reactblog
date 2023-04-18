@@ -31,13 +31,11 @@ app.post('/add/data', (req, res) => {
 })
 
 //모든 데이터 조회
-/*
 app.get('/get/data', (req, res) => {
     Teacher.findAll()
         .then( result => { res.send(result) })
         .catch( err => { throw err })
 })
-*/
 
 //특정 데이터 조회
 /*app.get('/get/data', (req, res) => {
@@ -57,17 +55,33 @@ app.get('/get/data', (req, res) => {
         .catch( err => { throw err })
 })*/
 //하나의 데이터 조회
-app.get('/get/data', (req, res) => {
+/*app.get('/get/data', (req, res) => {
     Teacher.findOne({
         where : { id : 2 }
     })
         .then( result => { res.send(result) })
         .catch( err => { throw err })
-})
+})*/
 
 //findOne과 findAll의 차이점은 findAll은 array형태로 데이터를 보내고 findOne은 object 형태로 데이터를 보낸다
 
 
+app.post('/modify/data', (req, res) => {
+    Teacher.update({ name : req.body.modify.name }, {
+        where : { id : req.body.modify.id }
+    })
+        .then( result => { res.send(result) })
+        .catch( err => { throw err })
+})
+
+//여러개의 값을 업데이트할때 사용
+/*app.post('/modify/data', (req, res) => {
+    Teacher.update({ name : 'Same_name' }, {
+        where : { [Op.or]: [{ id : 1 }, { name : 'Alan' }]}
+    })
+        .then( result => { res.send(result) })
+        .catch( err => { throw err })
+})*/
 
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
